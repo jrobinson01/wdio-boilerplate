@@ -4,7 +4,6 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "clean":"rm -r ./screenshots",
     "test": "node bin/webdriver.js"
   },
   "author": "",

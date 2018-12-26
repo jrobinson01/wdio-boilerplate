@@ -1,20 +1,4 @@
 /* eslint-disable no-unused-vars */
-const path = require('path');
-const VisualRegressionCompare = require('wdio-visual-regression-service/compare');
-
-function getScreenshotName(basePath) {
-  return function(context) {
-    const type = context.type;
-    const testName = context.test.title;
-    const browserVersion = parseInt(context.browser.version, 10);
-    const browserName = context.browser.name;
-    const browserViewport = context.meta.viewport;
-    const browserWidth = browserViewport.width;
-    const browserHeight = browserViewport.height;
-
-    return path.join(basePath, `${testName}_${type}_${browserName}_v${browserVersion}_${browserWidth}x${browserHeight}.png`);
-  };
-}
 exports.config = {
 
     // =====================
@@ -86,9 +70,14 @@ exports.config = {
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
     // https://docs.saucelabs.com/reference/platforms-configurator
     //
-    capabilities: [{
+    capabilities: [
+      {
         browserName: 'chrome'
-    }],
+      },
+      {
+        browserName: 'firefox'
+      }
+    ],
     //
     //
     //
@@ -143,20 +132,7 @@ exports.config = {
     // },
     //
     // SERVICES
-    services: [
-      'visual-regression'
-    ],
-    visualRegression: {
-      compare: new VisualRegressionCompare.LocalCompare({
-        referenceName: getScreenshotName(path.join(process.cwd(), 'screenshots/reference')),
-        screenshotName: getScreenshotName(path.join(process.cwd(), 'screenshots/screen')),
-        diffName: getScreenshotName(path.join(process.cwd(), 'screenshots/diff')),
-        misMatchTolerance: 0.01,
-      }),
-      viewportChangePause: 100,
-      viewports: [{ width: 800, height: 600 }],
-      orientations: ['landscape'],// mobile only??
-    },
+    //
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber
     // see also: http://webdriver.io/docs/frameworks.html

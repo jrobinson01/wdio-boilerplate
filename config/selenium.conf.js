@@ -5,5 +5,8 @@ module.exports = {
     chrome: {
       version: '2.44'
     },
+    firefox: {
+      version: '0.23.0'
+    }
   }
 };
