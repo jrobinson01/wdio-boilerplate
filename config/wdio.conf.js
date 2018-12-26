@@ -1,5 +1,20 @@
 /* eslint-disable no-unused-vars */
+const path = require('path');
+const VisualRegressionCompare = require('wdio-visual-regression-service/compare');
 
+function getScreenshotName(basePath) {
+  return function(context) {
+    const type = context.type;
+    const testName = context.test.title;
+    const browserVersion = parseInt(context.browser.version, 10);
+    const browserName = context.browser.name;
+    const browserViewport = context.meta.viewport;
+    const browserWidth = browserViewport.width;
+    const browserHeight = browserViewport.height;
+
+    return path.join(basePath, `${testName}_${type}_${browserName}_v${browserVersion}_${browserWidth}x${browserHeight}.png`);
+  };
+}
 exports.config = {
 
     // =====================
@@ -12,9 +27,9 @@ exports.config = {
     // according to your user and key information. However, if you are using a private Selenium
     // backend you should define the host address, port, and path here.
     //
-    hostname: '0.0.0.0',
-    port: 4444,
-    path: '/wd/hub',
+    // hostname: '0.0.0.0',
+    // port: 4444,
+    // path: '/wd/hub',
     //
     // =================
     // Service Providers
@@ -100,14 +115,14 @@ exports.config = {
     // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
     // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
     // gets prepended directly.
-    baseUrl: 'https://www.google.com',
+    baseUrl: 'https://yourfi.banno-uat.com',
     //
     // If you only want to run your tests until a specific amount of tests have failed use
     // bail (default is 0 - don't bail, run all tests).
     bail: 0,
     //
     // Default timeout for all waitFor* commands.
-    waitforTimeout: 1000,
+    waitforTimeout: 30000,
     //
     // Initialize the browser instance with a WebdriverIO plugin. The object should have the
     // plugin name as key and the desired plugin options as properties. Make sure you have
@@ -127,6 +142,21 @@ exports.config = {
     //     browserevent: {}
     // },
     //
+    // SERVICES
+    services: [
+      'visual-regression'
+    ],
+    visualRegression: {
+      compare: new VisualRegressionCompare.LocalCompare({
+        referenceName: getScreenshotName(path.join(process.cwd(), 'screenshots/reference')),
+        screenshotName: getScreenshotName(path.join(process.cwd(), 'screenshots/screen')),
+        diffName: getScreenshotName(path.join(process.cwd(), 'screenshots/diff')),
+        misMatchTolerance: 0.01,
+      }),
+      viewportChangePause: 100,
+      viewports: [{ width: 800, height: 600 }],
+      orientations: ['landscape'],// mobile only??
+    },
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber
     // see also: http://webdriver.io/docs/frameworks.html
@@ -151,7 +181,7 @@ exports.config = {
     jasmineNodeOpts: {
         //
         // Jasmine default timeout
-        defaultTimeoutInterval: 5000,
+        defaultTimeoutInterval: 30000,
         //
         // The Jasmine framework allows interception of each assertion in order to log the state of the application
         // or website depending on the result. For example, it is pretty handy to take a screenshot every time
@@ -215,6 +245,7 @@ exports.config = {
      * @param {Array.<String>} specs List of spec file paths that are to be run
      */
     before: function (capabilities, specs) {
+      require('../commands/find-element-in-shadow-dom');
     },
     /**
      * Hook that gets executed before the suite starts
