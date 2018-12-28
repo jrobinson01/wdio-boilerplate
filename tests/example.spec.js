@@ -13,7 +13,7 @@ describe('setValue test', () => {
     });
   });
 
-  describe('setValue test with execute', () => {
+  xdescribe('setValue test with execute', () => {
     it('should set the value of the input', () => {
       const input = browser.execute(function() {
         return document.body.querySelector('#search-input input');

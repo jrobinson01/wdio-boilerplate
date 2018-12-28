@@ -2,6 +2,7 @@ const selenium = require('selenium-standalone');
 const seleniumConfig = require('../config/selenium.conf.js');
 const path = require('path');
 const wdioConfigFile = `${__dirname}/../config/wdio.conf.js`;
+
 // Selenium server process
 let seleniumServer = null;
 
@@ -39,8 +40,8 @@ function stopSelenium() {
 }
 
 function runWdio() {
-  const webdriverPath = path.dirname(require.resolve('webdriverio'));
-  const Launcher = require(`${webdriverPath}/lib/launcher`);
+  // const webdriverPath = path.dirname(require.resolve('webdriverio'));
+  const Launcher = require(`@wdio/cli/build/launcher`).default;
   let wdio = new Launcher(wdioConfigFile, {});
   return wdio.run().then(code => {
     if (code !== 0) {
