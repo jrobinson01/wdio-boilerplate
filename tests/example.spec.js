@@ -17,8 +17,8 @@ describe('setValue test', () => {
     it('should set the value of the input', () => {
       const input = browser.execute(function() {
         return document.body.querySelector('#search-input input');
-      }).value;
-      console.log('executed querySelector element:', input);
+      });
+      console.log('querySelector element', input);
       // fails in FF, passes in Chrome
       input.setValue('baz');
       expect(input.getValue()).toEqual('baz');
