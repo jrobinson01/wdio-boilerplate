@@ -1,9 +1,8 @@
 describe('setValue test', () => {
   beforeAll(() => {
     browser.url('http://www.youtube.com');
-    // $('#search-input input').waitForExist();
-    browser.waitForExist('#search-input input');// should warn on deprecated command
-    browser.waitForVisible('#search-input input');// should warn on deprecated command
+    // $('#search-input input').waitForExist();// works in v5, disabled to test deprecation warnings
+    browser.waitForExist('#search-input input');// should warn on deprecated command?
   });
 
   describe('setValue test without command', () => {
@@ -16,7 +15,7 @@ describe('setValue test', () => {
     });
   });
 
-  xdescribe('setValue test with execute', () => {
+  describe('setValue test with execute', () => {
     it('should set the value of the input', () => {
       const input = browser.execute(function() {
         return document.body.querySelector('#search-input input');
@@ -25,7 +24,7 @@ describe('setValue test', () => {
       // fails in FF, passes in Chrome (in wdio v4)
       input.setValue('baz');
       console.log('value', input.getValue());
-      expect(input.getValue()).toEqual('baz');
+      expect(input.getValue()).toEqual('lasjdf');// should fail in jasmine but doesn't
     });
   });
 });
