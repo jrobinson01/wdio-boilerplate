@@ -40,7 +40,6 @@ function stopSelenium() {
 }
 
 function runWdio() {
-  // const webdriverPath = path.dirname(require.resolve('webdriverio'));
   const Launcher = require(`@wdio/cli/build/launcher`).default;
   let wdio = new Launcher(wdioConfigFile, {});
   return wdio.run().then(code => {
