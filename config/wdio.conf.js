@@ -67,7 +67,8 @@ exports.config = {
     //
     // Level of logging verbosity: trace | debug | info | warn | error
     logLevel: 'info',
-    logDir: './logs/',
+    // logOutput: './logs/', does nothing?
+    outputDir: './logs/',
     //
     // Warns when a deprecated command is used
     deprecationWarnings: true,
@@ -137,9 +138,9 @@ exports.config = {
         // The Jasmine framework allows interception of each assertion in order to log the state of the application
         // or website depending on the result. For example, it is pretty handy to take a screenshot every time
         // an assertion fails.
-        expectationResultHandler: function(passed, assertion) {
-            // do something
-        }
+        // expectationResultHandler: function(passed, assertion) {
+        //     // do something
+        // }
     },
 
     //

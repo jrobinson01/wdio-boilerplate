@@ -2,13 +2,13 @@ describe('setValue test', () => {
   beforeAll(() => {
     browser.url('http://www.youtube.com');
     // $('#search-input input').waitForExist();// works in v5, disabled to test deprecation warnings
-    browser.waitForExist('#search-input input');// should warn on deprecated command?
+    browser.waitForExist('#search-input input');// should error?
   });
 
   describe('setValue test without command', () => {
     it('should set the value of the input', () => {
       const input = $('#search-input input');
-      input.waitForVisible();
+      input.waitForVisible();// should error?
       // console.log('direct element:', input);
       input.setValue('bar');
       expect(input.getValue()).toEqual('bar');
