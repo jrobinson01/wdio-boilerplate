@@ -127,7 +127,7 @@ exports.config = {
     // Test reporter for stdout.
     // The only one supported by default is 'dot'
     // see also: http://webdriver.io/docs/dot-reporter.html
-    // reporters: ['dot'],
+    reporters: ['dot'],
     //
     // Options to be passed to Jasmine.
     jasmineNodeOpts: {

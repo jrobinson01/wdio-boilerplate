@@ -1,8 +1,8 @@
 describe('setValue test', () => {
   beforeAll(() => {
     browser.url('http://www.youtube.com');
-    // $('#search-input input').waitForExist();// works in v5, disabled to test deprecation warnings
-      browser.waitForExist('#search-input input');// should error?
+    // $('#search-input input').waitForExist();// works in v5, disabled to test errors
+    browser.waitForExist('#search-input input');// should error?
   });
 
   describe('setValue test without command', () => {
