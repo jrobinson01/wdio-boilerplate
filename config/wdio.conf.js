@@ -40,20 +40,21 @@ exports.config = {
     // and 30 processes will get spawned. The property handles how many capabilities
     // from the same test should run tests.
     //
-    maxInstances: 10,
+    maxInstances: 2,
     //
     // If you have trouble getting all important capabilities together, check out the
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
     // https://docs.saucelabs.com/reference/platforms-configurator
     //
     capabilities: [
+      // JR: firefox fails with shadowRoot() command, due to 'cyclic object value' error when calling element.getProperty('shadowRoot')
       {
         // maxInstances can get overwritten per capability. So if you have an in-house Selenium
         // grid with only 5 firefox instances available you can make sure that not more than
         // 5 instances get started at a time.
         // maxInstances: 5,
         //
-        browserName: 'firefox'
+        browserName: 'firefox',
       },
       {
         browserName: 'chrome'
@@ -66,7 +67,7 @@ exports.config = {
     // Define all options that are relevant for the WebdriverIO instance here
     //
     // Level of logging verbosity: trace | debug | info | warn | error
-    logLevel: 'info',
+    logLevel: 'debug',
     // logOutput: './logs/', does nothing?
     outputDir: './logs/',
     //
@@ -173,9 +174,8 @@ exports.config = {
      * @param {Array.<Object>} capabilities list of capabilities details
      * @param {Array.<String>} specs List of spec file paths that are to be run
      */
-    before: function (capabilities, specs) {
-      require('../commands/find-element-in-shadow-dom');
-    },
+    // before: function (capabilities, specs) {
+    // },
     /**
      * Runs before a WebdriverIO command gets executed.
      * @param {String} commandName hook command name

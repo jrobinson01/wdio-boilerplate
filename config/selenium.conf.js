@@ -6,7 +6,7 @@ module.exports = {
       version: '2.44'
     },
     firefox: {
-      version: '0.23.0'
+      version: '0.24.0'
     }
   }
 };
