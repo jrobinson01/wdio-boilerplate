@@ -1,4 +1,4 @@
-describe('setValue test', () => {
+describe('shadowRoot() test', () => {
   beforeAll(() => {
     browser.url('https://sm-element-demo.firebaseapp.com/');
     $('blog-app').waitForDisplayed();
