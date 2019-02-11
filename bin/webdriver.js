@@ -46,7 +46,7 @@ function runWdio() {
     if (code !== 0) {
       console.error(`wdio exited with code ${code}`);
     }
-  }).catch(err => console.error('error running wdio', err));
+  }).catch(err => console.error('error running wdio:', err));
 }
 
 let fatalError = false;

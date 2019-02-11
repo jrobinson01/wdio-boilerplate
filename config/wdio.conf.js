@@ -69,8 +69,8 @@ exports.config = {
     // Define all options that are relevant for the WebdriverIO instance here
     //
     // Level of logging verbosity: trace | debug | info | warn | error
-    logLevel: 'debug',
-    // logOutput: './logs/', does nothing?
+    logLevel: 'trace',
+
     outputDir: './logs/',
     //
     // Warns when a deprecated command is used
@@ -125,26 +125,31 @@ exports.config = {
     //
     // Make sure you have the wdio adapter package for the specific framework installed
     // before running any tests.
-    framework: 'jasmine',
+    framework: 'mocha',
     //
     // Test reporter for stdout.
     // The only one supported by default is 'dot'
     // see also: http://webdriver.io/docs/dot-reporter.html
-    // reporters: ['dot'],
+    // JR: specifying any reporter, results in no browsers opening.
+    reporters: ['spec'],
     //
     // Options to be passed to Jasmine.
-    jasmineNodeOpts: {
-        //
-        // Jasmine default timeout
-        defaultTimeoutInterval: 60000,
-        //
-        // The Jasmine framework allows interception of each assertion in order to log the state of the application
-        // or website depending on the result. For example, it is pretty handy to take a screenshot every time
-        // an assertion fails.
-        // expectationResultHandler: function(passed, assertion) {
-        //     // do something
-        // }
-    },
+    // jasmineNodeOpts: {
+    //     //
+    //     // Jasmine default timeout
+    //     defaultTimeoutInterval: 60000,
+    //     //
+    //     // The Jasmine framework allows interception of each assertion in order to log the state of the application
+    //     // or website depending on the result. For example, it is pretty handy to take a screenshot every time
+    //     // an assertion fails.
+    //     expectationResultHandler: function(passed, assertion) {
+    //         // do something
+    //         if (!passed) {
+    //           console.log('expectation failed', assertion);
+    //         }
+    //         return true;
+    //     }
+    // },
 
     //
     // =====
@@ -176,8 +181,11 @@ exports.config = {
      * @param {Array.<Object>} capabilities list of capabilities details
      * @param {Array.<String>} specs List of spec file paths that are to be run
      */
-    // before: function (capabilities, specs) {
-    // },
+    before: function (capabilities, specs) {
+      const chai = require('chai');
+      global.expect = chai.expect;
+      chai.Should();
+    },
     /**
      * Runs before a WebdriverIO command gets executed.
      * @param {String} commandName hook command name
