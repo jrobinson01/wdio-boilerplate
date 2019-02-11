@@ -130,8 +130,7 @@ exports.config = {
     // Test reporter for stdout.
     // The only one supported by default is 'dot'
     // see also: http://webdriver.io/docs/dot-reporter.html
-    // JR: specifying any reporter, results in no browsers opening.
-    reporters: ['spec'],
+    reporters: ['dot'],
     //
     // Options to be passed to Jasmine.
     // jasmineNodeOpts: {
