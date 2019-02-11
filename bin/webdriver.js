@@ -44,9 +44,9 @@ function runWdio() {
   let wdio = new Launcher(wdioConfigFile, {});
   return wdio.run().then(code => {
     if (code !== 0) {
-      throw new Error(`wdio exited with code ${code}`);
+      console.error(`wdio exited with code ${code}`);
     }
-  });
+  }).catch(err => console.error('error running wdio', err));
 }
 
 let fatalError = false;
