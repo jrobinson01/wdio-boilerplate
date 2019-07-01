@@ -18,7 +18,8 @@ exports.config = {
     // directory is where your package.json resides, so `wdio` will be called from there.
     //
     specs: [
-        'tests/**/*.spec.js'
+        'tests/**/*.spec.js',
+        'tests/shadow.spec.js',
     ],
     // Patterns to exclude.
     exclude: [
@@ -47,20 +48,20 @@ exports.config = {
     // https://docs.saucelabs.com/reference/platforms-configurator
     //
     capabilities: [
-      {
-        // maxInstances can get overwritten per capability. So if you have an in-house Selenium
-        // grid with only 5 firefox instances available you can make sure that not more than
-        // 5 instances get started at a time.
-        // maxInstances: 5,
-        //
-        browserName: 'firefox',
-      },
+      // {
+      //   // maxInstances can get overwritten per capability. So if you have an in-house Selenium
+      //   // grid with only 5 firefox instances available you can make sure that not more than
+      //   // 5 instances get started at a time.
+      //   // maxInstances: 5,
+      //   //
+      //   browserName: 'firefox',
+      // },
       {
         browserName: 'chrome'
       },
-      {
-        browserName: 'safari'
-      },
+      // {
+      //   browserName: 'safari'
+      // },
     ],
     //
     // ===================
@@ -84,10 +85,10 @@ exports.config = {
     // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
     // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
     // gets prepended directly.
-    baseUrl: 'http://localhost',
+    baseUrl: 'https://sm-element-demo.firebaseapp.com',
     //
     // Default timeout for all waitFor* commands.
-    waitforTimeout: 10000,
+    waitforTimeout: 20000,
     //
     // Default timeout in milliseconds for request
     // if Selenium Grid doesn't send response
@@ -118,37 +119,37 @@ exports.config = {
     // Services take over a specific job you don't want to take care of. They enhance
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
-    // services: [],//
+    // services: ['shadow-dom'],
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber
     // see also: http://webdriver.io/docs/frameworks.html
     //
     // Make sure you have the wdio adapter package for the specific framework installed
     // before running any tests.
-    framework: 'mocha',
+    framework: 'jasmine',
     //
     // Test reporter for stdout.
     // The only one supported by default is 'dot'
     // see also: http://webdriver.io/docs/dot-reporter.html
-    reporters: ['dot'],
+    reporters: ['spec'],
     //
     // Options to be passed to Jasmine.
-    // jasmineNodeOpts: {
-    //     //
-    //     // Jasmine default timeout
-    //     defaultTimeoutInterval: 60000,
-    //     //
-    //     // The Jasmine framework allows interception of each assertion in order to log the state of the application
-    //     // or website depending on the result. For example, it is pretty handy to take a screenshot every time
-    //     // an assertion fails.
-    //     expectationResultHandler: function(passed, assertion) {
-    //         // do something
-    //         if (!passed) {
-    //           console.log('expectation failed', assertion);
-    //         }
-    //         return true;
-    //     }
-    // },
+    jasmineNodeOpts: {
+        //
+        // Jasmine default timeout
+        defaultTimeoutInterval: 60000,
+        //
+        // The Jasmine framework allows interception of each assertion in order to log the state of the application
+        // or website depending on the result. For example, it is pretty handy to take a screenshot every time
+        // an assertion fails.
+        expectationResultHandler: function(passed, assertion) {
+            // do something
+            if (!passed) {
+              console.log('expectation failed', assertion);
+            }
+            return true;
+        }
+    },
 
     //
     // =====
@@ -180,11 +181,8 @@ exports.config = {
      * @param {Array.<Object>} capabilities list of capabilities details
      * @param {Array.<String>} specs List of spec file paths that are to be run
      */
-    before: function (capabilities, specs) {
-      const chai = require('chai');
-      global.expect = chai.expect;
-      chai.Should();
-    },
+    // before: function (capabilities, specs) {
+    // },
     /**
      * Runs before a WebdriverIO command gets executed.
      * @param {String} commandName hook command name

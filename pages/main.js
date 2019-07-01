@@ -10,19 +10,19 @@ class Main {
   }
 
   get header() {
-    return this.blogApp.shadowRoot('header');
+    return this.blogApp.shadow$('header');
   }
 
   get mainContent() {
-    return this.blogApp.shadowRoot('article#main');
+    return this.blogApp.shadow$('article#main');
   }
 
   get menu() {
-    return this.blogApp.shadowRoot('article#menu');
+    return this.blogApp.shadow$('article#menu');
   }
 
   get footer() {
-    return this.blogApp.shadowRoot('footer');
+    return this.blogApp.shadow$('footer');
   }
 
 }
