@@ -8,6 +8,14 @@
     <template>
       <div id="greeting">Hello</div>
       <button>Click me</button>
+      <div id="display-none" style="display:none;">Display:none</div>
+      <div id="multiple-children">
+        <div>a</div>
+        <div style="display:none;">b</div>
+      </div>
+      <div id="hidden-parent" style="display:none;">
+        <div id="hidden-child">CHILD!</div>
+      </div>
     </template>
     <script>
       customElements.define('my-element', class extends HTMLElement {
@@ -32,7 +40,7 @@
         }
       });
     </script>
-    <!-- <script>
+    <script>
       function isElementDisplayed(element) {
         function nodeIsElement(node) {
             if (!node)
@@ -239,7 +247,7 @@
         return true
     }
 
-    </script> -->
+    </script>
     <my-element></my-element>
   </body>
 </html>
