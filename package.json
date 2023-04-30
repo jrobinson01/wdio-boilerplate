@@ -12,6 +12,6 @@
     "selenium-standalone": "^6.15.4",
     "wdio-jasmine-framework": "^0.3.8",
     "wdio-spec-reporter": "^0.1.5",
-    "webdriverio": "^4.14.1"
+    "webdriverio": "^8.8.8"
   }
 }
